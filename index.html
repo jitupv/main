@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jitu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --fg:      #f0ece4;
+      --muted:   #5a5650;
+      --accent:  #c9a96e;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient glow — subtle, off-center */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(201,169,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .stage {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Thin horizontal rule — animates width */
+    .rule {
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 2.8rem;
+      opacity: 0.5;
+      animation: expandRule 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    }
+
+    .name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(4rem, 18vw, 7rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--fg);
+      opacity: 0;
+      animation: riseIn 1s ease 0.5s forwards;
+    }
+
+    /* The dot — accent colour, draws the eye */
+    .name .dot {
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin-top: 1.4rem;
+      font-size: clamp(0.68rem, 2.5vw, 0.78rem);
+      font-weight: 300;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: riseIn 1s ease 0.85s forwards;
+    }
+
+    .rule-bottom {
+      width: 0;
+      height: 1px;
+      background: var(--muted);
+      margin: 2.8rem auto 0;
+      opacity: 0.2;
+      animation: expandRule 1.2s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
+    }
+
+    /* Keyframes */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    @keyframes expandRule {
+      from { width: 0;    }
+      to   { width: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="rule"></div>
+    <h1 class="name">Jitu<span class="dot">.</span></h1>
+    <p class="tagline">Something worth showing is on its way</p>
+    <div class="rule-bottom"></div>
+  </div>
+</body>
+</html>
